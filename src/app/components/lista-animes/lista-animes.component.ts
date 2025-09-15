@@ -23,16 +23,13 @@ export class ListaAnimesComponent implements OnInit {
 
   loadFavorites(): void {
     this.loading = true;
-    this.animeService.getFavorites().subscribe({
-      next: (res: any) => {
-        this.favorites = res;
-        this.loading = false;
-      },
-      error: (err) => {
-        this.loading = false;
-        this.showError('Erro ao carregar favoritos');
-      }
-    });
+    try {
+      this.favorites = this.animeService.getFavorites();
+    } catch (err) {
+      this.showError('Erro ao carregar favoritos');
+    } finally {
+      this.loading = false;
+    }
   }
 
   get filteredFavorites(): any[] {
@@ -48,15 +45,13 @@ export class ListaAnimesComponent implements OnInit {
   }
 
   removeFromFavorites(anime: any): void {
-    this.animeService.removeFromFavorites(anime.mal_id).subscribe({
-      next: () => {
-        this.favorites = this.favorites.filter(fav => fav.mal_id !== anime.mal_id);
-        this.showSuccess('Anime removido dos favoritos!');
-      },
-      error: (err) => {
-        this.showError('Erro ao remover anime');
-      }
-    });
+    try {
+      this.animeService.removeFromFavorites(anime.mal_id);
+      this.favorites = this.favorites.filter(fav => fav.mal_id !== anime.mal_id);
+      this.showSuccess('Anime removido dos favoritos!');
+    } catch (err) {
+      this.showError('Erro ao remover anime');
+    }
   }
 
   clearSearch(): void {

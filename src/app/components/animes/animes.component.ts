@@ -121,14 +121,12 @@ export class AnimesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.nextAnime();
   }
 
-  like(): void {
-    if (this.currentAnime) {
-      this.animeService.addToFavorites(this.currentAnime).subscribe({
-        next: () => {}
-      });
-    }
-    this.nextAnime();
+like(): void {
+  if (this.currentAnime) {
+    this.animeService.addToFavorites(this.currentAnime);
   }
+  this.nextAnime();
+}
 
   onPanStart(event: any): void {
     if (this.isAnimating) return;

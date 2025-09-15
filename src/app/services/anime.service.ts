@@ -8,7 +8,7 @@ import { environment } from 'src/environment/environment';
 })
 export class AnimeService {
   private API_URL = 'https://api.jikan.moe/v4';
-  private FAVORITES_URL = `${environment.apiUrl}/favorites`;
+  private favoritesKey = 'favorites';
   private currentPage = 1;
   private hasNextPage = true;
   private isLoading = false;
@@ -18,15 +18,13 @@ export class AnimeService {
     this.loadFavorites();
   }
 
-  // Carregar favoritos do JSON Server
+  // Carregar favoritos do localStorage
   private loadFavorites(): void {
-    this.http.get(this.FAVORITES_URL).subscribe({
-      next: (res: any) => {
-        this.favorites = res;
-      },
-      error: (err) => {
-      }
-    });
+    this.favorites = JSON.parse(localStorage.getItem(this.favoritesKey) || '[]');
+  }
+
+  private saveFavorites(): void {
+    localStorage.setItem(this.favoritesKey, JSON.stringify(this.favorites));
   }
 
   // Verificar se um anime já está nos favoritos
@@ -40,41 +38,27 @@ export class AnimeService {
   }
 
   // Adicionar aos favoritos
-  addToFavorites(anime: any): Observable<any> {
-    // Verificar se já não está nos favoritos
+  addToFavorites(anime: any): void {
     if (!this.isAnimeInFavorites(anime.mal_id)) {
-      return this.http.post(this.FAVORITES_URL, anime).pipe(
-        tap((newFavorite: any) => {
-          this.favorites.push(newFavorite);
-        })
-      );
+      this.favorites.push(anime);
+      this.saveFavorites();
     }
-    return new Observable();
   }
 
   // Remover dos favoritos
-  removeFromFavorites(animeId: number): Observable<any> {
-    // Encontrar o item pelo mal_id
-    const favoriteToRemove = this.favorites.find(fav => fav.mal_id === animeId);
-
-    if (favoriteToRemove && favoriteToRemove.id) {
-      return this.http.delete(`${this.FAVORITES_URL}/${favoriteToRemove.id}`).pipe(
-        tap(() => {
-          this.favorites = this.favorites.filter(fav => fav.mal_id !== animeId);
-        })
-      );
-    }
-    return new Observable();
+  removeFromFavorites(animeId: number): void {
+    this.favorites = this.favorites.filter(fav => fav.mal_id !== animeId);
+    this.saveFavorites();
   }
 
   // Buscar favoritos
-  getFavorites(): Observable<any> {
-    return this.http.get(this.FAVORITES_URL);
+  getFavorites(): any[] {
+    return this.favorites;
   }
 
   // Buscar favorito por ID
-  getFavoriteById(animeId: number): Observable<any> {
-    return this.http.get(`${this.FAVORITES_URL}?mal_id=${animeId}`);
+  getFavoriteById(animeId: number): any {
+    return this.favorites.find(fav => fav.mal_id === animeId);
   }
 
   // pegar animes populares com paginação e filtro de favoritos
@@ -107,12 +91,10 @@ export class AnimeService {
     );
   }
 
-  // Verificar se há próxima página
   hasMorePages(): boolean {
     return this.hasNextPage;
   }
 
-  // buscar anime pelo nome
   searchAnime(query: string): Observable<any> {
     return this.http.get(`${this.API_URL}/anime?q=${query}`);
   }
