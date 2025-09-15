@@ -5,7 +5,8 @@
     "start": "concurrently \"npm run start:json\" \"npm run start:angular\"",
     "start:angular": "ng serve",
     "start:json": "json-server --watch db.json --port 3000",
-    "dev": "npm run start"
+    "dev": "npm run start",
+    "build": "ng build anime-lista-pwa"
   },
   "private": true,
   "dependencies": {
