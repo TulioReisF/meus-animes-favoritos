@@ -22,10 +22,10 @@ jobs:
       run: npm ci
 
     - name: Build Angular app
-      run: npm run build -- --configuration production
+      run: npm run build -- --project anime-lista-pwa --configuration production
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist/teste-lista-anime
+        publish_dir: ./dist/anime-lista-pwa
