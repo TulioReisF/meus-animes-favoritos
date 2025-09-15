@@ -1,0 +1,72 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+mat-toolbar {
+  height: 56px; /* altura padrão da toolbar Material */
+}
+
+.header-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: linear-gradient(125deg, #FD5826, #FF8A15);
+}
+
+
+/* logo centralizada */
+.app-logo {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.app-logo__logo {
+  width: 42px;
+  border-radius: 50%;
+}
+
+/* conteudo ocupa o meio da tela */
+.page-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* footer fixo embaixo */
+.footer-toolbar {
+  height: 56px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  padding: 10px 0;
+  background: linear-gradient(125deg, #FD5826, #FF8A15);
+}
+
+.home-button{
+  color: #e6e6e6;
+}
+
+.footer-actions {
+  display: flex;
+  gap: 30px;
+}
+
+/* botões com borda */
+::ng-deep .mat-mdc-icon-button .mat-mdc-button-touch-target {
+  border: 1px solid;
+  border-radius: 50%;
+}

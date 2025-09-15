@@ -1,0 +1,159 @@
+.like-button {
+  color: var(--primary-color);
+}
+
+.cancel-button {
+  color: var(--grey-color);
+}
+
+.anime-screen {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 16px;
+  perspective: 1000px; /* Adiciona perspectiva 3D */
+}
+
+.anime-card-container {
+  height: 100%;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.anime-card {
+  height: 100%;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  cursor: grab;
+  transform-style: preserve-3d;
+}
+
+.anime-card.dragging {
+  cursor: grabbing;
+  transition: none; /* Remove transição durante arraste */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.anime-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.anime-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.anime-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: white;
+  z-index: 2;
+}
+
+.anime-title {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+}
+
+.anime-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.genre {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.anime-actions {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 16px 0;
+  background-color: #000;
+}
+
+.finished {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.swipe-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.swipe-indicator.left {
+  left: 20px;
+  background-color: rgba(239, 68, 68, 0.8);
+  border: 3px solid #ef4444;
+}
+
+.swipe-indicator.right {
+  right: 20px;
+  background-color: rgba(34, 197, 94, 0.8);
+  border: 3px solid #22c55e;
+}
+
+.swipe-indicator.active {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.swipe-indicator mat-icon {
+  color: white;
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+/* Efeito de brilho para os indicadores quando ativos */
+.swipe-indicator.active::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background: inherit;
+  filter: blur(10px);
+  opacity: 0.5;
+  z-index: -1;
+}

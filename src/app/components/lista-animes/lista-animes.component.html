@@ -1,0 +1,71 @@
+<div class="favorites-container">
+  <!-- Barra de busca -->
+  <div class="search-bar" style="padding-top: 2rem;" *ngIf="!loading && favorites.length > 0">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar nos favoritos</mat-label>
+      <input matInput [(ngModel)]="searchTerm" placeholder="Digite o nome do anime...">
+      <button matSuffix mat-icon-button *ngIf="searchTerm" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p>Carregando favoritos...</p>
+  </div>
+
+  <!-- Sem favoritos -->
+  <div class="no-favorites" *ngIf="!loading && favorites.length === 0">
+    <mat-icon class="empty-icon">favorite_border</mat-icon>
+    <p>Volte para a página principal e comece a adicionar animes aos seus favoritos!</p>
+  </div>
+
+  <!-- Lista de favoritos -->
+  <div class="favorites-list" *ngIf="!loading && favorites.length > 0">
+    <!-- Mensagem de busca vazia -->
+    <div *ngIf="searchTerm && filteredFavorites.length === 0" class="no-results">
+      <mat-icon>search_off</mat-icon>
+      <h3>Nenhum resultado encontrado para "{{ searchTerm }}"</h3>
+      <button mat-button (click)="clearSearch()">Limpar busca</button>
+    </div>
+
+    <!-- Cards dos favoritos -->
+    <mat-card class="favorite-card" *ngFor="let anime of filteredFavorites">
+      <div class="favorite-image-container">
+        <img [src]="anime.images.jpg.image_url" alt="{{ anime.title }}">
+        <div class="favorite-overlay">
+          <h3 class="favorite-title">{{ anime.title }}</h3>
+          <div class="favorite-actions">
+            <button mat-icon-button class="remove-btn" (click)="removeFromFavorites(anime)"
+                    matTooltip="Remover dos favoritos">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <mat-card-content class="favorite-content">
+        <div class="favorite-info">
+          <span class="score" *ngIf="anime.score">
+            ⭐ {{ anime.score }}
+          </span>
+          <span class="episodes" *ngIf="anime.episodes">
+            📺 {{ anime.episodes }} eps
+          </span>
+        </div>
+
+        <div class="genres" *ngIf="anime.genres && anime.genres.length > 0">
+          <span class="genre-tag" *ngFor="let genre of anime.genres.slice(0, 2)">
+            {{ genre.name }}
+          </span>
+          <span class="more-genres" *ngIf="anime.genres.length > 2">
+            +{{ anime.genres.length - 2 }}
+          </span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

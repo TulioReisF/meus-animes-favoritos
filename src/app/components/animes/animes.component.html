@@ -1,0 +1,65 @@
+<div *ngIf="isLoading" class="loading-screen">
+  <mat-spinner diameter="60"></mat-spinner>
+  <p>Carregando animes...</p>
+</div>
+
+<div *ngIf="!isLoading && currentAnime; else finished" class="anime-screen">
+  <div #animeCardContainer class="anime-card-container">
+    <mat-card
+      class="anime-card"
+      [class.dragging]="isDragging"
+      (panstart)="onPanStart($event)"
+      (panmove)="onPanMove($event)"
+      (panend)="onPanEnd($event)">
+
+      <div class="anime-image-container">
+        <img class="anime-image" [src]="currentAnime.images.jpg.image_url" alt="{{ currentAnime.title }}">
+
+        <!-- Overlay com título e gêneros -->
+        <div class="anime-overlay">
+          <h2 class="anime-title">{{ currentAnime.title }}</h2>
+          <div class="anime-genres">
+            <span class="genre" *ngFor="let genre of currentAnime.genres">
+              {{ genre.name }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Indicadores de swipe -->
+        <div class="swipe-indicator left" [class.active]="isSwipingLeft">
+          <mat-icon>close</mat-icon>
+        </div>
+        <div class="swipe-indicator right" [class.active]="isSwipingRight">
+          <mat-icon>favorite</mat-icon>
+        </div>
+      </div>
+
+      <!-- Ações no rodapé do card -->
+      <mat-card-actions class="anime-actions">
+        <button mat-icon-button class="cancel-button" (click)="dislike()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-icon-button class="like-button" (click)="like()">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #finished>
+  <div class="finished">
+    <div *ngIf="noAnimesAvailable" class="no-animes">
+      <h2>🎉 Você já viu todos os animes disponíveis!</h2>
+      <p>Não há mais animes para mostrar ou todos os animes já estão na sua lista de favoritos.</p>
+      <button mat-raised-button color="primary" (click)="loadAnimes()">
+        <mat-icon>refresh</mat-icon>
+        Recarregar Animes
+      </button>
+    </div>
+    <div *ngIf="!noAnimesAvailable">
+      <h2>🎉 Você viu todos os animes!</h2>
+      <p>Volte mais tarde para descobrir novos animes!</p>
+    </div>
+  </div>
+</ng-template>
