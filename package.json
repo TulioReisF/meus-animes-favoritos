@@ -4,7 +4,7 @@
   "scripts": {
     "start": "concurrently \"npm run start:json\" \"npm run start:angular\"",
     "start:angular": "ng serve",
-    "start:json": "json-server --watch mock.json --port 3000",
+    "start:json": "json-server --watch db.json --port 3000",
     "dev": "npm run start"
   },
   "private": true,
