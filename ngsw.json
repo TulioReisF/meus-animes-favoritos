@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1757978022481,
+  "timestamp": 1757978805381,
   "index": "/meus-animes-favoritos/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/meus-animes-favoritos/favicon.ico",
         "/meus-animes-favoritos/index.html",
-        "/meus-animes-favoritos/main.9a32828dc3baa4e0.js",
+        "/meus-animes-favoritos/main.7b3bc979ce6a3b4f.js",
         "/meus-animes-favoritos/manifest.webmanifest",
         "/meus-animes-favoritos/polyfills.1d886b3d9ba65cde.js",
         "/meus-animes-favoritos/runtime.3dc5df17472d426c.js",
@@ -54,8 +54,8 @@
     "/meus-animes-favoritos/assets/icons/icon-96x96.png": "592885efcbfee27e5e20be4fa3043589390d2740",
     "/meus-animes-favoritos/assets/icons/icon.png": "9d35c7d077809c9236958479fbecc8d67e37aabb",
     "/meus-animes-favoritos/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/meus-animes-favoritos/index.html": "83e2b9755baf4e55671e28a6a319a7fddb34b38e",
-    "/meus-animes-favoritos/main.9a32828dc3baa4e0.js": "48e18671857bced87599e3f74e7690a435b88364",
+    "/meus-animes-favoritos/index.html": "ac456a448cfbeda2fd1566942b415c4c86a8d536",
+    "/meus-animes-favoritos/main.7b3bc979ce6a3b4f.js": "e7ecf2a432f9ce1a61e11edc8a4779bc68e68c0e",
     "/meus-animes-favoritos/manifest.webmanifest": "4af2cde9a0d0439a7d369e61941730b8b8eff7e7",
     "/meus-animes-favoritos/polyfills.1d886b3d9ba65cde.js": "b7adb50c0a46b32cf581a0aafc510f9b0bc2da61",
     "/meus-animes-favoritos/runtime.3dc5df17472d426c.js": "b9b8f2f3cce9133dcfa3a4be50ea26455dcd1dce",
